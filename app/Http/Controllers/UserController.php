@@ -53,7 +53,7 @@ class UserController extends Controller
             'name' => 'string',
             'email' => 'email|unique:users,email,' . $user->id,
             'password' => 'min:8',
-            'role' => 'enum:superadmin,admin,user'
+            'role' => 'in:superadmin,admin,user'
         ]);
 
         $user->update($validatedData);
