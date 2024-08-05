@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ClientController;
 
 Route::get('/me', function (Request $request) {
     return $request->user();
@@ -15,3 +16,14 @@ Route::middleware(['auth:sanctum','role:superadmin'])->group(function(){
     Route::get('users/{id}', [UserController::class, 'show']);
     Route::put('users/{id}', [UserController::class, 'update']);
 });
+
+Route::middleware(['auth:sanctum','role:admin'])->group(function(){
+    Route::get('/clients', [ClientController::class, 'index']);
+    Route::post('/clients', [ClientController::class, 'create']);
+    Route::delete('clients/{id}', [ClientController::class, 'destroy']);
+    Route::get('clients/{id}', [ClientController::class, 'show']);
+    Route::put('clients/{id}', [ClientController::class, 'update']);
+    Route::get('clients/{id}/logo', [ClientController::class, 'logo']);
+});
+
+
