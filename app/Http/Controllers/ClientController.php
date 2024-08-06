@@ -49,6 +49,9 @@ class ClientController extends Controller
     public function update(Request $request, Client $client)
     {
         $client = Client::find($request->id);
+        if (!$client) {
+            return response()->json(['message' => 'Nie znaleziono klienta'], 404);
+        }
 
         $data = $request->validate([
             'name' => 'string',

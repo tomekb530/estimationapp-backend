@@ -26,4 +26,12 @@ Route::middleware(['auth:sanctum','role:admin'])->group(function(){
     Route::get('clients/{id}/logo', [ClientController::class, 'logo']);
 });
 
+Route::middleware(['auth:sanctum','role:admin'])->group(function(){
+    Route::get('/projects', [ProjectController::class, 'index']);
+    Route::post('/projects', [ProjectController::class, 'create']);
+    Route::delete('projects/{id}', [ProjectController::class, 'destroy']);
+    Route::get('projects/{id}', [ProjectController::class, 'show']);
+    Route::put('projects/{id}', [ProjectController::class, 'update']);
+});
+
 
