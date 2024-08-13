@@ -25,7 +25,7 @@ class ClientController extends Controller
             'email' => 'required|email',
             'description' => 'required|string',
             'country' => 'required|string',
-            'logo' => 'nullable|image',
+            'logo' => 'required|nullable|image',
         ]);
 
         if ($request->hasFile('logo')) {
@@ -46,7 +46,7 @@ class ClientController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Client $client)
+    public function update(Request $request)
     {
         $client = Client::find($request->id);
         if (!$client) {
@@ -54,7 +54,7 @@ class ClientController extends Controller
         }
 
         $data = $request->validate([
-            'name' => 'string',
+            'name' => 'required|string',
             'email' => 'email',
             'description' => 'string',
             'country' => 'string',
@@ -64,6 +64,8 @@ class ClientController extends Controller
         if ($request->hasFile('logo')) {
             $data['logo'] = $request->file('logo')->store('logos');
         }
+
+
 
         $client->update($data);
 

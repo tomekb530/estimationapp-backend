@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Project;
 
 class ProjectController extends Controller
 {
@@ -27,7 +28,7 @@ class ProjectController extends Controller
         return $project;
     }
 
-    public function update(Request $request, Project $project)
+    public function update(Request $request)
     {
         $project = Project::find($request->id);
         if(!$project){

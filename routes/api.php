@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\EstimationController;
 
 Route::get('/me', function (Request $request) {
     return $request->user();
@@ -22,7 +24,7 @@ Route::middleware(['auth:sanctum','role:admin'])->group(function(){
     Route::post('/clients', [ClientController::class, 'create']);
     Route::delete('clients/{id}', [ClientController::class, 'destroy']);
     Route::get('clients/{id}', [ClientController::class, 'show']);
-    Route::put('clients/{id}', [ClientController::class, 'update']);
+    Route::post('clients/{id}', [ClientController::class, 'update']);//PHP BUG FORMDATA
     Route::get('clients/{id}/logo', [ClientController::class, 'logo']);
 });
 
@@ -31,7 +33,15 @@ Route::middleware(['auth:sanctum','role:admin'])->group(function(){
     Route::post('/projects', [ProjectController::class, 'create']);
     Route::delete('projects/{id}', [ProjectController::class, 'destroy']);
     Route::get('projects/{id}', [ProjectController::class, 'show']);
-    Route::put('projects/{id}', [ProjectController::class, 'update']);
+    Route::post('projects/{id}', [ProjectController::class, 'update']);
+});
+
+Route::middleware(['auth:sanctum','role:admin'])->group(function(){
+    Route::get('/estimations', [EstimationController::class, 'index']);
+    Route::post('/estimations', [EstimationController::class, 'create']);
+    Route::delete('estimations/{id}', [EstimationController::class, 'destroy']);
+    Route::get('estimations/{id}', [EstimationController::class, 'show']);
+    Route::put('estimations/{id}', [EstimationController::class, 'update']);
 });
 
 
