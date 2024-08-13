@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->longText('description');
             $table->string('country');
-            $table->binary('logo')->nullable();
+            $table->string('logo')->nullable();
             $table->timestamps();
         });
     }
